@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pressione uma tecla para mudar a cor do fundo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: white;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .key-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #333;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 10px; /* Bordas arredondadas */
+}
+        .key-box.r {
+            background-color: red;
+            color: white;
+        }
+
+        .key-box.g {
+            background-color: green;
+            color: white;
+        }
+
+        .key-box.b {
+            background-color: blue;
+            color: white;
+        }
+
+        .key-box.w {
+            background-color: white;
+            color: black;
+            border-color: #ddd;
+        }
+
+        .key-box.active {
+            border: 2px solid;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pressione uma tecla para mudar a cor do fundo</h1>
+    <div class="key-box r">R</div>
+    <div class="key-box g">G</div>
+    <div class="key-box b">B</div>
+    <div class="key-box w">W</div>
+
+    <script>
+        // Função que altera a cor de fundo com base na tecla pressionada
+        function changeBackgroundColor(event) {
+            const keyBoxR = document.querySelector('.key-box.r');
+            const keyBoxG = document.querySelector('.key-box.g');
+            const keyBoxB = document.querySelector('.key-box.b');
+            const keyBoxW = document.querySelector('.key-box.w');
+
+            if (event.type === 'keydown') {
+                // Adiciona a classe "active" nas caixas de teclas pressionadas
+                switch (event.key.toUpperCase()) {
+                    case 'R':
+                        document.body.style.backgroundColor = 'red';
+                        keyBoxR.classList.add('active');
+                        break;
+                    case 'G':
+                        document.body.style.backgroundColor = 'green';
+                        keyBoxG.classList.add('active');
+                        break;
+                    case 'B':
+                        document.body.style.backgroundColor = 'blue';
+                        keyBoxB.classList.add('active');
+                        break;
+                    case 'W':
+                        document.body.style.backgroundColor = 'white';
+                        keyBoxW.classList.add('active');
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        // Função para resetar a cor quando a tecla for liberada
+        function resetBackgroundColor(event) {
+            const keyBoxR = document.querySelector('.key-box.r');
+            const keyBoxG = document.querySelector('.key-box.g');
+            const keyBoxB = document.querySelector('.key-box.b');
+            const keyBoxW = document.querySelector('.key-box.w');
+
+            // Remove a classe "active" das caixas de teclas liberadas
+            if (event.key.toUpperCase() === 'R') {
+                keyBoxR.classList.remove('active');
+            } else if (event.key.toUpperCase() === 'G') {
+                keyBoxG.classList.remove('active');
+            } else if (event.key.toUpperCase() === 'B') {
+                keyBoxB.classList.remove('active');
+            } else if (event.key.toUpperCase() === 'W') {
+                keyBoxW.classList.remove('active');
+            }
+
+            // Resetando a cor do fundo
+            if (event.key === 'R' || event.key === 'G' || event.key === 'B' || event.key === 'W') {
+                document.body.style.backgroundColor = '';
+            }
+        }
+
+        // Adiciona os event listeners para keydown e keyup
+        document.addEventListener('keydown', changeBackgroundColor);
+        document.addEventListener('keyup', resetBackgroundColor);
+    </script>
+</body>
+</html>
